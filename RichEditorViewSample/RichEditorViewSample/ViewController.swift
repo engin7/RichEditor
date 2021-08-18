@@ -72,9 +72,10 @@ extension ViewController: RichEditorToolbarDelegate {
     }
     
     func richEditorToolbarInsertImage(_ toolbar: RichEditorToolbar) {
-        if  let link = toolbar.searchBar.text {
+        if  let link = toolbar.searchBarImg.text {
             toolbar.editor?.insertImage(link, alt: "")
         }
+        toolbar.searchBarImg.text = nil
         toolbar.resetBars()
     }
 
@@ -83,12 +84,15 @@ extension ViewController: RichEditorToolbarDelegate {
         if  let link = toolbar.searchBar.text {
             toolbar.editor?.insertLink(link, title: "")
         }
+        toolbar.searchBar.text = nil
         toolbar.resetBars()
     }
     
     func richEditorTookFocus(_ editor: RichEditorView) {
         // reset menu
         guard let iav = editor.inputAccessoryView as? RichEditorToolbar else { return }
+        iav.searchBarImg.text = nil
+        iav.searchBar.text = nil
         iav.resetBars()
     }
 }

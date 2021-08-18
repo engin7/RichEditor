@@ -73,7 +73,8 @@ import UIKit
     private var defautToolbar: UIToolbar
     private var backgroundToolbar: UIToolbar
     public var searchBar = UISearchBar()
-     
+    public var searchBarImg = UISearchBar()
+
     lazy var headlineToolbar: UIToolbar = {
     let bar = UIToolbar(frame: CGRect(x: 0, y:0, width: bounds.width, height: 44))
     var buttons = [UIBarButtonItem]()
@@ -82,7 +83,7 @@ import UIKit
     return headLineBar
     }()
     
-    func createLinkBar(_ option: RichEditorDefaultOption) -> UIToolbar {
+    func createLinkBar(_ option: RichEditorDefaultOption, searchBar: UISearchBar) -> UIToolbar {
         let bar = UIToolbar(frame: CGRect(x: 0, y:0, width: bounds.width, height: 44))
         bar.isHidden = true
         bar.alpha = 0
@@ -114,11 +115,11 @@ import UIKit
     }
     
     lazy var linkToolbar: UIToolbar = {
-        createLinkBar(RichEditorDefaultOption.pasteLink)
+        createLinkBar(RichEditorDefaultOption.pasteLink, searchBar: searchBar)
     }()
   
     lazy var ImgLinkToolbar: UIToolbar = {
-        createLinkBar(RichEditorDefaultOption.pasteImage)
+        createLinkBar(RichEditorDefaultOption.pasteImage, searchBar: searchBarImg)
     }()
     
     lazy var fontToolbar: UIToolbar = {

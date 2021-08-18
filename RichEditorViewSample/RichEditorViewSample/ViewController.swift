@@ -70,9 +70,12 @@ extension ViewController: RichEditorToolbarDelegate {
         let color = randomColor()
         toolbar.editor?.setTextBackgroundColor(color)
     }
-
+    
     func richEditorToolbarInsertImage(_ toolbar: RichEditorToolbar) {
-        toolbar.editor?.insertImage("https://gravatar.com/avatar/696cf5da599733261059de06c4d1fe22", alt: "Gravatar")
+        if  let link = toolbar.searchBar.text {
+            toolbar.editor?.insertImage(link, alt: "")
+        }
+        toolbar.resetBars()
     }
 
     func richEditorToolbarInsertLink(_ toolbar: RichEditorToolbar) {
@@ -83,5 +86,9 @@ extension ViewController: RichEditorToolbarDelegate {
         toolbar.resetBars()
     }
     
-    
+    func richEditorTookFocus(_ editor: RichEditorView) {
+        // reset menu
+        guard let iav = editor.inputAccessoryView as? RichEditorToolbar else { return }
+        iav.resetBars()
+    }
 }

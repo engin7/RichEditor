@@ -378,6 +378,11 @@ import UIKit
         runJS("RE.insertImage('\(url.escaped)', '\(alt.escaped)');")
     }
     
+    public func showImageLink() {
+        guard let iav = inputAccessoryView as? RichEditorToolbar else { return }
+        iav.toggleBars(bar: iav.ImgLinkToolbar)
+    }
+    
     public func showLink() {
         guard let iav = inputAccessoryView as? RichEditorToolbar else { return }
         iav.toggleBars(bar: iav.linkToolbar)

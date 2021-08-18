@@ -82,12 +82,11 @@ import UIKit
     return headLineBar
     }()
     
-    lazy var linkToolbar: UIToolbar = {
+    func createLinkBar(_ option: RichEditorDefaultOption) -> UIToolbar {
         let bar = UIToolbar(frame: CGRect(x: 0, y:0, width: bounds.width, height: 44))
         bar.isHidden = true
         bar.alpha = 0
         
-        let option = RichEditorDefaultOption.pasteLink
         let button: RichBarButtonItem
         
         let handler = { [weak self] in
@@ -112,8 +111,16 @@ import UIKit
         bar.items = [searchBarButton,negativeSeperator,button]
         toolbarScroll.addSubview(bar)
        return bar
+    }
+    
+    lazy var linkToolbar: UIToolbar = {
+        createLinkBar(RichEditorDefaultOption.pasteLink)
     }()
   
+    lazy var ImgLinkToolbar: UIToolbar = {
+        createLinkBar(RichEditorDefaultOption.pasteImage)
+    }()
+    
     lazy var fontToolbar: UIToolbar = {
        let bar = UIToolbar(frame: CGRect(x: 0, y:0, width: 820, height: 44))
        var buttons = [UIBarButtonItem]()
@@ -172,7 +179,7 @@ import UIKit
     }
     
     public func resetBars() {
-        let bars = [sizeToolbar,allignmentToolbar,fontToolbar,headlineToolbar, linkToolbar]
+        let bars = [sizeToolbar,allignmentToolbar,fontToolbar,headlineToolbar, linkToolbar, ImgLinkToolbar]
         bars.forEach({
             $0.isHidden = true
             $0.alpha = 0

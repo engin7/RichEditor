@@ -9,6 +9,7 @@
 import UIKit
 import RichEditorView
 
+@available(iOS 9.0, *)
 class ViewController: UIViewController {
 
     @IBOutlet var editorView: RichEditorView!
@@ -24,15 +25,26 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         editorView.delegate = self
-        editorView.inputAccessoryView = toolbar
+        editorView.customAccessoryView = toolbar
         editorView.placeholder = "Type some text..."
 
         toolbar.delegate = self
         toolbar.editor = editorView
+        self.view.addSubview(toolbar)
+        
+        toolbar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            toolbar.bottomAnchor.constraint(equalTo: htmlTextView.bottomAnchor),
+            toolbar.leadingAnchor.constraint(equalTo: htmlTextView.leadingAnchor),
+            toolbar.widthAnchor.constraint(equalTo: self.view.widthAnchor),
+            toolbar.heightAnchor.constraint(equalToConstant: 44)
+        ])
+ 
     }
 
 }
 
+@available(iOS 9.0, *)
 extension ViewController: RichEditorDelegate {
 
     func richEditor(_ editor: RichEditorView, contentDidChange content: String) {
@@ -45,6 +57,7 @@ extension ViewController: RichEditorDelegate {
     
 }
 
+@available(iOS 9.0, *)
 extension ViewController: RichEditorToolbarDelegate {
     
     fileprivate func randomColor() -> UIColor {

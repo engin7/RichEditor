@@ -53,6 +53,8 @@ import UIKit
         }
     }
 
+    open var customAccessoryView: RichEditorToolbar?
+    
     /// The internal UIWebView that is used to display the text.
     open private(set) var webView: UIWebView
 
@@ -235,8 +237,7 @@ import UIKit
         if size != 0 {
             runJS("RE.setFontSize('\(size)px');")
         }
-        guard let iav = inputAccessoryView as? RichEditorToolbar else { return }
-        iav.toggleBars(bar: iav.sizeToolbar)
+        customAccessoryView?.toggleBars(bar: customAccessoryView?.sizeToolbar)
     }
     
     public func setEditorBackgroundColor(_ color: UIColor) {
@@ -250,43 +251,33 @@ import UIKit
     public func redo() {
         runJS("RE.redo();")
     }
-     
-    
-    public func toggleHeadlines() {
-        guard let iav = inputAccessoryView as? RichEditorToolbar else { return }
-        iav.toggleBars(bar: iav.headlineToolbar)
-    }
-    
-    public func toggleAllignments() {
-        guard let iav = inputAccessoryView as? RichEditorToolbar else { return }
-        iav.toggleBars(bar: iav.allignmentToolbar)
+      
+    public func resetBars() {
+        customAccessoryView?.resetBars()
     }
     
     public func setFont(_ font: String) {
         if font != "back" {
             runJS("RE.setFont('\(font)');")
         }
-        guard let iav = inputAccessoryView as? RichEditorToolbar else { return }
-        iav.toggleBars(bar: iav.fontToolbar)
+        customAccessoryView?.toggleBars(bar: customAccessoryView?.fontToolbar)
     }
      
     public func showTextSize() {
-        guard let iav = inputAccessoryView as? RichEditorToolbar else { return }
-        iav.toggleBars(bar: iav.sizeToolbar)
+        customAccessoryView?.toggleBars(bar: customAccessoryView?.sizeToolbar)
+
     }
     
     public func showHeader() {
-        toggleHeadlines()
+        customAccessoryView?.toggleBars(bar: customAccessoryView?.headlineToolbar)
     }
     
     public func showFonts() {
-        guard let iav = inputAccessoryView as? RichEditorToolbar else { return }
-        iav.toggleBars(bar: iav.fontToolbar)
+        customAccessoryView?.toggleBars(bar: customAccessoryView?.fontToolbar)
     }
     
     public func showAllignments() {
-        guard let iav = inputAccessoryView as? RichEditorToolbar else { return }
-        iav.toggleBars(bar: iav.allignmentToolbar)
+        customAccessoryView?.toggleBars(bar: customAccessoryView?.allignmentToolbar)
     }
     
     public func setCode() {
@@ -334,7 +325,7 @@ import UIKit
     
     public func header(_ h: Int) {
         runJS("RE.setHeading('\(h)');")
-        toggleHeadlines()
+        resetBars()
     }
 
     public func indent() {
@@ -379,13 +370,11 @@ import UIKit
     }
     
     public func showImageLink() {
-        guard let iav = inputAccessoryView as? RichEditorToolbar else { return }
-        iav.toggleBars(bar: iav.ImgLinkToolbar)
+        customAccessoryView?.toggleBars(bar: customAccessoryView?.ImgLinkToolbar)
     }
     
     public func showLink() {
-        guard let iav = inputAccessoryView as? RichEditorToolbar else { return }
-        iav.toggleBars(bar: iav.linkToolbar)
+        customAccessoryView?.toggleBars(bar: customAccessoryView?.linkToolbar)
     }
      
     public func prepareForLink() {

@@ -79,7 +79,7 @@ public enum RichEditorHeadingOption: RichEditorOption {
     public func action(_ toolbar: RichEditorToolbar) {
         switch self  {
             case .header(let h): toolbar.editor?.header(h)
-            case .back: toolbar.editor?.toggleHeadlines()
+            case .back: toolbar.editor?.resetBars()
         }
     }
 }
@@ -206,7 +206,7 @@ public enum RichEditorAllignmentOption: RichEditorOption {
     
     public func action(_ toolbar: RichEditorToolbar) {
         switch  self  {
-        case .back: toolbar.editor?.toggleAllignments()
+        case .back: toolbar.editor?.resetBars()
         case .indent: toolbar.editor?.indent()
         case .outdent: toolbar.editor?.outdent()
         case .orderedList: toolbar.editor?.orderedList()
@@ -221,7 +221,9 @@ public enum RichEditorAllignmentOption: RichEditorOption {
 }
 /// RichEditorOptions is an enum of standard editor actions
 public enum RichEditorDefaultOption: RichEditorOption {
-
+    
+    case back
+    case save
     case clear
     case undo
     case redo
@@ -244,7 +246,7 @@ public enum RichEditorDefaultOption: RichEditorOption {
     case pasteLink
     case pasteImage
     
-    public static let all: [RichEditorDefaultOption] = [
+    public static let all: [RichEditorDefaultOption] = [.save,
         .clear, .undo, .redo, .bold, .italic, .header, .size, .font,
         .subscript, .superscript, .strike, .underline,
         .textColor, .textBackgroundColor, .allignment,
@@ -256,6 +258,8 @@ public enum RichEditorDefaultOption: RichEditorOption {
     public var image: UIImage? {
         var name = ""
         switch self {
+        case .save: name = "save"
+        case .back: name = "back"
         case .clear: name = "clear"
         case .code: name = "code"
         case .blockquote: name = "blockQuote"
@@ -285,6 +289,8 @@ public enum RichEditorDefaultOption: RichEditorOption {
     
     public var title: String {
         switch self {
+        case .save: return NSLocalizedString("save", comment: "")
+        case .back: return NSLocalizedString("back", comment: "")
         case .clear: return NSLocalizedString("Clear", comment: "")
         case .undo: return NSLocalizedString("Undo", comment: "")
         case .redo: return NSLocalizedString("Redo", comment: "")
@@ -311,6 +317,8 @@ public enum RichEditorDefaultOption: RichEditorOption {
     
     public func action(_ toolbar: RichEditorToolbar) {
         switch self {
+        case .save: toolbar.delegate?.richEditorToolbarSaveClicked?(toolbar)
+        case .back: toolbar.editor?.resetBars()
         case .clear: toolbar.editor?.removeFormat()
         case .undo: toolbar.editor?.undo()
         case .redo: toolbar.editor?.redo()

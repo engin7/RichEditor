@@ -22,6 +22,10 @@ import UIKit
 
     /// Called when the Insert Link toolbar item is pressed.
     @objc optional func richEditorToolbarInsertLink(_ toolbar: RichEditorToolbar)
+    
+    
+    @objc optional func richEditorToolbarSaveClicked(_ toolbar: RichEditorToolbar)
+
 }
 
 /// RichBarButtonItem is a subclass of UIBarButtonItem that takes a callback as opposed to the target-action pattern
@@ -72,6 +76,7 @@ import UIKit
     private var toolbarScroll: UIScrollView
     private var defautToolbar: UIToolbar
     private var backgroundToolbar: UIToolbar
+    
     public var searchBar = UISearchBar()
     public var searchBarImg = UISearchBar()
 
@@ -84,32 +89,36 @@ import UIKit
     }()
     
     func createLinkBar(_ option: RichEditorDefaultOption, searchBar: UISearchBar) -> UIToolbar {
-        let bar = UIToolbar(frame: CGRect(x: 0, y:0, width: bounds.width, height: 44))
+        let bar = UIToolbar(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: bounds.width, height: 44)))
         bar.isHidden = true
         bar.alpha = 0
         
-        let button: RichBarButtonItem
-        
-        let handler = { [weak self] in
-            if let strongSelf = self {
-                option.action(strongSelf)
+        let options =  [RichEditorDefaultOption.back, option]
+        var buttons: [RichBarButtonItem] = []
+
+        for opt in options {
+            let handler = { [weak self] in
+                if let strongSelf = self {
+                    opt.action(strongSelf)
+                }
+            }
+            if let image = opt.image {
+                buttons.append(RichBarButtonItem(image: image, handler: handler))
+            } else {
+                let title = opt.title
+                buttons.append(RichBarButtonItem(title: title, handler: handler))
             }
         }
-        if let image = option.image {
-            button = RichBarButtonItem(image: image, handler: handler)
-        } else {
-            let title = option.title
-            button = RichBarButtonItem(title: title, handler: handler)
-        }
+        
          
         let negativeSeperator = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         negativeSeperator.width = 12
-        searchBar.frame = CGRect(x: 0, y:0, width: bounds.width - 70, height: 44)
+        searchBar.frame = CGRect(x: 0, y:0, width: bounds.width - 90, height: 44)
         searchBar.barTintColor = .lightGray
         searchBar.setImage(UIImage(), for: .search, state: .normal)
         searchBar.placeholder = "paste a link e.g., https://www.wikipedia.org"
         let searchBarButton = UIBarButtonItem.init(customView: searchBar)
-        bar.items = [searchBarButton,negativeSeperator,button]
+        bar.items = [buttons[0],searchBarButton,negativeSeperator,buttons[1]]
         toolbarScroll.addSubview(bar)
        return bar
     }
@@ -123,7 +132,8 @@ import UIKit
     }()
     
     lazy var fontToolbar: UIToolbar = {
-       let bar = UIToolbar(frame: CGRect(x: 0, y:0, width: 820, height: 44))
+       let f = CGRect(origin:  CGPoint.zero, size: CGSize(width: 820, height: 44))
+       let bar = UIToolbar(frame:f)
        var buttons = [UIBarButtonItem]()
        let opt = RichEditorFontOption.all
        let fontBar = createToolBar(bar: bar,options: opt)
@@ -132,7 +142,8 @@ import UIKit
     
     
     lazy var allignmentToolbar: UIToolbar = {
-       let bar = UIToolbar(frame: CGRect(x: 0, y:0, width: bounds.width, height: 44))
+       let f = CGRect(origin: CGPoint.zero, size: CGSize(width: bounds.width, height: 44))
+       let bar = UIToolbar(frame: f)
        var buttons = [UIBarButtonItem]()
        let opt = RichEditorAllignmentOption.all
        let alignBar = createToolBar(bar: bar,options: opt)
@@ -146,7 +157,7 @@ import UIKit
             width = bounds.width
         }
 
-       let bar = UIToolbar(frame: CGRect(x: 0, y:0, width: width, height: 44))
+       let bar = UIToolbar(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: width, height: 44)))
        var buttons = [UIBarButtonItem]()
        let opt = RichEditorTextSizeOption.all
        let fontBar = createToolBar(bar: bar,options: opt)
@@ -176,6 +187,7 @@ import UIKit
         }
         bar.items = buttons
         toolbarScroll.addSubview(bar)
+        bar.frame.origin = defautToolbar.frame.origin
        return bar
     }
     
@@ -190,7 +202,8 @@ import UIKit
         toolbarScroll.setContentOffset(.zero, animated: true)
     }
      
-    func toggleBars(bar: UIToolbar) {
+    func toggleBars(bar: UIToolbar?) {
+        guard let bar = bar else {return}
         toolbarScroll.setContentOffset(.zero, animated: true)
              if bar.isHidden {
                 bar.alpha = 1

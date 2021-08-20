@@ -16,9 +16,17 @@ class ViewController: UIViewController {
     @IBOutlet var htmlTextView: UITextView!
 
     lazy var toolbar: RichEditorToolbar = {
-        let toolbar = RichEditorToolbar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 44))
-        toolbar.options = RichEditorDefaultOption.allWithoutSave
-        return toolbar
+        let tb = RichEditorToolbar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 44))
+        tb.layer.cornerRadius = 8
+        tb.layer.borderWidth = 0
+        if #available(iOS 11.0, *) {
+            tb.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        } else {
+            // Fallback on earlier versions
+        }
+        tb.clipsToBounds = true
+        tb.options = RichEditorDefaultOption.allWithoutSave
+        return tb
     }()
 
     override func viewDidLoad() {

@@ -246,20 +246,13 @@ public enum RichEditorDefaultOption: RichEditorOption {
     case pasteLink
     case pasteImage
     
-    public static let all: [RichEditorDefaultOption] = [.save,
+    public static let all: [RichEditorDefaultOption] = [
         .clear, .undo, .redo, .bold, .italic, .header, .size, .font,
         .subscript, .superscript, .strike, .underline,
         .textColor, .textBackgroundColor, .allignment,
         .code, .blockquote,.image, .link
     ]
-    
-    public static let allWithoutSave: [RichEditorDefaultOption] = [
-        .clear, .undo, .redo, .bold, .italic, .header, .size, .font,
-        .subscript, .superscript, .strike, .underline,
-        .textColor, .textBackgroundColor, .allignment,
-        .code, .blockquote,.image, .link
-    ]
-
+  
     // MARK: RichEditorOption
 
     public var image: UIImage? {

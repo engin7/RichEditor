@@ -17,7 +17,7 @@ class ViewController: UIViewController {
 
     lazy var toolbar: RichEditorToolbar = {
         let toolbar = RichEditorToolbar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 44))
-        toolbar.options = RichEditorDefaultOption.all
+        toolbar.options = RichEditorDefaultOption.allWithoutSave
         return toolbar
     }()
 
@@ -34,7 +34,7 @@ class ViewController: UIViewController {
         
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            toolbar.bottomAnchor.constraint(equalTo: htmlTextView.bottomAnchor),
+            toolbar.bottomAnchor.constraint(equalTo: htmlTextView.topAnchor),
             toolbar.leadingAnchor.constraint(equalTo: htmlTextView.leadingAnchor),
             toolbar.widthAnchor.constraint(equalTo: self.view.widthAnchor),
             toolbar.heightAnchor.constraint(equalToConstant: 44)

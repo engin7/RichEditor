@@ -252,6 +252,13 @@ public enum RichEditorDefaultOption: RichEditorOption {
         .textColor, .textBackgroundColor, .allignment,
         .code, .blockquote,.image, .link
     ]
+    
+    public static let allWithoutSave: [RichEditorDefaultOption] = [
+        .clear, .undo, .redo, .bold, .italic, .header, .size, .font,
+        .subscript, .superscript, .strike, .underline,
+        .textColor, .textBackgroundColor, .allignment,
+        .code, .blockquote,.image, .link
+    ]
 
     // MARK: RichEditorOption
 

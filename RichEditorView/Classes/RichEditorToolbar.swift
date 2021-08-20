@@ -198,7 +198,7 @@ import UIKit
             $0.alpha = 0
         })
         defautToolbar.isHidden = false
-        toolbarScroll.contentSize.width = 750
+        toolbarScroll.contentSize.width = 780
         toolbarScroll.setContentOffset(.zero, animated: true)
     }
      
@@ -211,7 +211,7 @@ import UIKit
             } else {
                 bar.alpha = 0
                 // this should be defautToolbar.frame.width, temp fix for bug:
-                toolbarScroll.contentSize.width = 750
+                toolbarScroll.contentSize.width = 780
             }
                 bar.isHidden = !bar.isHidden
                 defautToolbar.isHidden = !bar.isHidden

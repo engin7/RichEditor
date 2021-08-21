@@ -25,7 +25,7 @@ class ViewController: UIViewController {
             // Fallback on earlier versions
         }
         tb.clipsToBounds = true
-        tb.options = RichEditorDefaultOption.allWithoutSave
+        tb.options = RichEditorDefaultOption.all
         return tb
     }()
 
@@ -42,7 +42,7 @@ class ViewController: UIViewController {
         
         toolbar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            toolbar.bottomAnchor.constraint(equalTo: htmlTextView.topAnchor),
+            toolbar.topAnchor.constraint(equalTo: editorView.bottomAnchor),
             toolbar.leadingAnchor.constraint(equalTo: htmlTextView.leadingAnchor),
             toolbar.widthAnchor.constraint(equalTo: self.view.widthAnchor),
             toolbar.heightAnchor.constraint(equalToConstant: 44)

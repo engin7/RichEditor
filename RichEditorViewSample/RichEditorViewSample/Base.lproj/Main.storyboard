@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -36,41 +37,39 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ltz-BS-px6">
-                                <rect key="frame" x="0.0" y="88" width="414" height="644"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="808"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMR-YK-M0h" customClass="RichEditorView" customModule="RichEditorView">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="644"/>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6Z7-YP-eHw">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMR-YK-M0h" customClass="RichEditorView" customModule="RichEditorView">
+                                                <rect key="frame" x="20" y="10" width="374" height="788"/>
+                                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                        <constraints>
+                                            <constraint firstItem="FMR-YK-M0h" firstAttribute="leading" secondItem="6Z7-YP-eHw" secondAttribute="leading" constant="20" id="VcT-XN-TWQ"/>
+                                            <constraint firstAttribute="bottom" secondItem="FMR-YK-M0h" secondAttribute="bottom" constant="10" id="Zsm-nV-WTP"/>
+                                            <constraint firstItem="FMR-YK-M0h" firstAttribute="top" secondItem="6Z7-YP-eHw" secondAttribute="top" constant="10" id="qMQ-fV-jno"/>
+                                            <constraint firstAttribute="trailing" secondItem="FMR-YK-M0h" secondAttribute="trailing" constant="20" id="sU1-xd-1hc"/>
+                                        </constraints>
                                     </view>
                                 </subviews>
                             </stackView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="HTML Preview" translatesAutoresizingMaskIntoConstraints="NO" id="nPH-ii-3sD">
-                                <rect key="frame" x="0.0" y="732" width="414" height="130"/>
-                                <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="130" id="Bfg-pU-mPH"/>
-                                </constraints>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="nPH-ii-3sD" firstAttribute="leading" secondItem="Ltz-BS-px6" secondAttribute="leading" id="0E5-3x-BXV"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="nPH-ii-3sD" secondAttribute="bottom" id="6AN-Fh-gVd"/>
-                            <constraint firstItem="nPH-ii-3sD" firstAttribute="trailing" secondItem="Ltz-BS-px6" secondAttribute="trailing" id="Ebo-jQ-SKI"/>
                             <constraint firstItem="Ltz-BS-px6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="HEv-TC-KKZ"/>
-                            <constraint firstItem="nPH-ii-3sD" firstAttribute="top" secondItem="Ltz-BS-px6" secondAttribute="bottom" id="HF8-Pm-Odz"/>
-                            <constraint firstItem="nPH-ii-3sD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Mu6-aT-245"/>
-                            <constraint firstAttribute="trailing" secondItem="nPH-ii-3sD" secondAttribute="trailing" id="NN3-F1-Dmx"/>
+                            <constraint firstItem="Ltz-BS-px6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="Yha-OI-kFY"/>
+                            <constraint firstAttribute="bottom" secondItem="Ltz-BS-px6" secondAttribute="bottom" id="dDo-rq-IRd"/>
+                            <constraint firstItem="Ltz-BS-px6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sJr-LY-bwX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="RichEditorView - Swift" id="pyE-1e-UBv"/>
                     <connections>
-                        <outlet property="bottomConstraint" destination="HF8-Pm-Odz" id="V0l-VW-svB"/>
+                        <outlet property="bottomConstraint" destination="dDo-rq-IRd" id="lHm-yg-uVB"/>
                         <outlet property="editorView" destination="FMR-YK-M0h" id="wch-rq-p16"/>
-                        <outlet property="htmlTextView" destination="nPH-ii-3sD" id="8qp-hR-DGl"/>
                         <outlet property="stackView" destination="Ltz-BS-px6" id="su1-NM-uz6"/>
                     </connections>
                 </viewController>
@@ -196,6 +195,9 @@
     <resources>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

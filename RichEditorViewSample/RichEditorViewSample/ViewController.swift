@@ -13,7 +13,6 @@ class ViewController: UIViewController {
 
 
     @IBOutlet var editorView: RichEditorView!
-    @IBOutlet var htmlTextView: UITextView!
 
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
@@ -38,7 +37,7 @@ class ViewController: UIViewController {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             let keyboarTop = UIScreen.main.bounds.height - keyboardSize.height
             // take inside container view
-            let distance = stackView.frame.maxY - keyboarTop
+            let distance = stackView.frame.maxY - keyboarTop - 20
             if distance > 0  {
                 bottomConstraint.constant = distance
              }
@@ -67,6 +66,11 @@ class ViewController: UIViewController {
         
         toolbar.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
         self.stackView.addArrangedSubview(toolbar)
+        
+        let padding = UIView()
+        padding.backgroundColor = UIColor(red: 0.9725, green: 0.9725, blue: 0.9725, alpha: 1.0) /* #f8f8f8 */
+        padding.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+        self.stackView.addArrangedSubview(padding)
     }
 
 }
@@ -75,11 +79,11 @@ class ViewController: UIViewController {
 extension ViewController: RichEditorDelegate {
 
     func richEditor(_ editor: RichEditorView, contentDidChange content: String) {
-        if content.isEmpty {
-            htmlTextView.text = "HTML Preview"
-        } else {
-            htmlTextView.text = content
-        }
+//        if content.isEmpty {
+//            htmlTextView.text = "HTML Preview"
+//        } else {
+//            htmlTextView.text = content
+//        }
     }
     
 }

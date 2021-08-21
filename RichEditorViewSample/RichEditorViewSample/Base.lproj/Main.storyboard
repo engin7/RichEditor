@@ -35,16 +35,21 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMR-YK-M0h" customClass="RichEditorView" customModule="RichEditorView">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Ltz-BS-px6">
                                 <rect key="frame" x="0.0" y="88" width="414" height="644"/>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="644" id="bsu-3N-XOc"/>
-                                </constraints>
-                            </view>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FMR-YK-M0h" customClass="RichEditorView" customModule="RichEditorView">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="644"/>
+                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </view>
+                                </subviews>
+                            </stackView>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="HTML Preview" translatesAutoresizingMaskIntoConstraints="NO" id="nPH-ii-3sD">
-                                <rect key="frame" x="0.0" y="730" width="414" height="132"/>
+                                <rect key="frame" x="0.0" y="732" width="414" height="130"/>
                                 <color key="backgroundColor" red="0.90196079015731812" green="0.90196079015731812" blue="0.90196079015731812" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="Bfg-pU-mPH"/>
+                                </constraints>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" name="CourierNewPSMT" family="Courier New" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -52,20 +57,21 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="FMR-YK-M0h" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="2aU-yH-A9U"/>
+                            <constraint firstItem="nPH-ii-3sD" firstAttribute="leading" secondItem="Ltz-BS-px6" secondAttribute="leading" id="0E5-3x-BXV"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="nPH-ii-3sD" secondAttribute="bottom" id="6AN-Fh-gVd"/>
-                            <constraint firstAttribute="trailing" secondItem="FMR-YK-M0h" secondAttribute="trailing" id="FQw-wS-HfB"/>
-                            <constraint firstItem="nPH-ii-3sD" firstAttribute="top" secondItem="FMR-YK-M0h" secondAttribute="bottom" constant="-2" id="Lzr-Wp-Dfm"/>
+                            <constraint firstItem="nPH-ii-3sD" firstAttribute="trailing" secondItem="Ltz-BS-px6" secondAttribute="trailing" id="Ebo-jQ-SKI"/>
+                            <constraint firstItem="Ltz-BS-px6" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" id="HEv-TC-KKZ"/>
+                            <constraint firstItem="nPH-ii-3sD" firstAttribute="top" secondItem="Ltz-BS-px6" secondAttribute="bottom" id="HF8-Pm-Odz"/>
                             <constraint firstItem="nPH-ii-3sD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Mu6-aT-245"/>
                             <constraint firstAttribute="trailing" secondItem="nPH-ii-3sD" secondAttribute="trailing" id="NN3-F1-Dmx"/>
-                            <constraint firstItem="FMR-YK-M0h" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Run-Td-1WG"/>
-                            <constraint firstItem="nPH-ii-3sD" firstAttribute="top" secondItem="FMR-YK-M0h" secondAttribute="bottom" constant="-2" id="jUq-Uq-KHX"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="RichEditorView - Swift" id="pyE-1e-UBv"/>
                     <connections>
+                        <outlet property="bottomConstraint" destination="HF8-Pm-Odz" id="V0l-VW-svB"/>
                         <outlet property="editorView" destination="FMR-YK-M0h" id="wch-rq-p16"/>
                         <outlet property="htmlTextView" destination="nPH-ii-3sD" id="8qp-hR-DGl"/>
+                        <outlet property="stackView" destination="Ltz-BS-px6" id="su1-NM-uz6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

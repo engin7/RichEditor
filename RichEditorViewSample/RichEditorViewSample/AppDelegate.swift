@@ -16,6 +16,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        if #available(iOS 9.0, *) {
+//            window!.rootViewController = ViewController
+        } else {
+            // Fallback on earlier versions
+        }
+
         return true
     }
 

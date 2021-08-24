@@ -2,15 +2,20 @@ PODS:
   - RichEditorView (5.0.0)
 
 DEPENDENCIES:
-  - RichEditorView (from `../`)
+  - RichEditorView (from `https://github.com/engin7/RichEditor.git`)
 
 EXTERNAL SOURCES:
   RichEditorView:
-    :path: ../
+    :git: https://github.com/engin7/RichEditor.git
+
+CHECKOUT OPTIONS:
+  RichEditorView:
+    :commit: 7d786e5b134782557dd8a1975c989ffc7508a63a
+    :git: https://github.com/engin7/RichEditor.git
 
 SPEC CHECKSUMS:
-  RichEditorView: 2b536e648162702950a152786223f5a55794504f
+  RichEditorView: cebe82c09dd84779c2a7d80df101e4e97bc02764
 
-PODFILE CHECKSUM: 7a4df9933ce0390c2a1aa64e14fa39cd32734a0d
+PODFILE CHECKSUM: e382409e87df8b46fa2849766ef6f33af71fb161
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.10.1

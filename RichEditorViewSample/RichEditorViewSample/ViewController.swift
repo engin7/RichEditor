@@ -9,12 +9,14 @@
 import UIKit
 import RichEditorView
 
-@available(iOS 9.0, *)
 class ViewController: UIViewController {
 
-    @IBOutlet var editorView: RichEditorView!
-    @IBOutlet var htmlTextView: UITextView!
 
+    @IBOutlet var editorView: RichEditorView!
+
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
     lazy var toolbar: RichEditorToolbar = {
         let tb = RichEditorToolbar(frame: CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 44))
         tb.layer.cornerRadius = 8
@@ -26,11 +28,34 @@ class ViewController: UIViewController {
         }
         tb.clipsToBounds = true
         tb.options = RichEditorDefaultOption.all
+         
         return tb
     }()
 
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            let keyboarTop = UIScreen.main.bounds.height - keyboardSize.height
+            // take inside container view
+            let distance = stackView.frame.maxY - keyboarTop - 20
+            if distance > 0  {
+                bottomConstraint.constant = distance
+             }
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if bottomConstraint.constant != 0 {
+            bottomConstraint.constant = 0
+        }
+    }
+
+    
     override func viewDidLoad() {
+
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         editorView.delegate = self
         editorView.customAccessoryView = toolbar
@@ -38,16 +63,14 @@ class ViewController: UIViewController {
 
         toolbar.delegate = self
         toolbar.editor = editorView
-        self.view.addSubview(toolbar)
         
-        toolbar.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            toolbar.bottomAnchor.constraint(equalTo: htmlTextView.topAnchor),
-            toolbar.leadingAnchor.constraint(equalTo: htmlTextView.leadingAnchor),
-            toolbar.widthAnchor.constraint(equalTo: self.view.widthAnchor),
-            toolbar.heightAnchor.constraint(equalToConstant: 44)
-        ])
- 
+        toolbar.heightAnchor.constraint(equalToConstant: 44.0).isActive = true
+        self.stackView.addArrangedSubview(toolbar)
+        
+        let padding = UIView()
+        padding.backgroundColor = UIColor(red: 0.9725, green: 0.9725, blue: 0.9725, alpha: 1.0) /* #f8f8f8 */
+        padding.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+        self.stackView.addArrangedSubview(padding)
     }
 
 }
@@ -56,11 +79,11 @@ class ViewController: UIViewController {
 extension ViewController: RichEditorDelegate {
 
     func richEditor(_ editor: RichEditorView, contentDidChange content: String) {
-        if content.isEmpty {
-            htmlTextView.text = "HTML Preview"
-        } else {
-            htmlTextView.text = content
-        }
+//        if content.isEmpty {
+//            htmlTextView.text = "HTML Preview"
+//        } else {
+//            htmlTextView.text = content
+//        }
     }
     
 }
@@ -117,3 +140,6 @@ extension ViewController: RichEditorToolbarDelegate {
         iav.resetBars()
     }
 }
+
+ 
+

@@ -10,7 +10,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   RichEditorView:
-    :commit: 66f4603cd3e8c57df3def60fe379d4f70422d416
+    :commit: bbad287380f2779fc0077eab92f2924cbe0676d4
     :git: https://github.com/engin7/RichEditor.git
 
 SPEC CHECKSUMS:

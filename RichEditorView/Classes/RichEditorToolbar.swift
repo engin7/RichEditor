@@ -198,7 +198,7 @@ import UIKit
             $0.alpha = 0
         })
         defautToolbar.isHidden = false
-        toolbarScroll.contentSize.width = 780
+        toolbarScroll.contentSize.width = 880
         toolbarScroll.setContentOffset(.zero, animated: true)
     }
      
@@ -211,7 +211,7 @@ import UIKit
             } else {
                 bar.alpha = 0
                 // this should be defautToolbar.frame.width, temp fix for bug:
-                toolbarScroll.contentSize.width = 780
+                toolbarScroll.contentSize.width = 880
             }
                 bar.isHidden = !bar.isHidden
                 defautToolbar.isHidden = !bar.isHidden
@@ -278,8 +278,8 @@ import UIKit
         }
         defautToolbar.items = buttons
 
-        let defaultIconWidth: CGFloat = 28
-        let barButtonItemMargin: CGFloat = 11
+        let defaultIconWidth: CGFloat = 36
+        let barButtonItemMargin: CGFloat = 12
         let width: CGFloat = buttons.reduce(0) {sofar, new in
             if let view = new.value(forKey: "view") as? UIView {
                 return sofar + view.frame.size.width + barButtonItemMargin

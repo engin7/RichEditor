@@ -25,7 +25,7 @@ class ViewController: UIViewController {
             // Fallback on earlier versions
         }
         tb.clipsToBounds = true
-        tb.options = RichEditorDefaultOption.allWithoutSave
+        tb.options = RichEditorDefaultOption.all
         return tb
     }()
 

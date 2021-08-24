@@ -10,11 +10,11 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   RichEditorView:
-    :commit: 7d786e5b134782557dd8a1975c989ffc7508a63a
+    :commit: 66f4603cd3e8c57df3def60fe379d4f70422d416
     :git: https://github.com/engin7/RichEditor.git
 
 SPEC CHECKSUMS:
-  RichEditorView: cebe82c09dd84779c2a7d80df101e4e97bc02764
+  RichEditorView: 78fea4c465fdf93215dc1fe54d5e29558cbf848a
 
 PODFILE CHECKSUM: e382409e87df8b46fa2849766ef6f33af71fb161
 

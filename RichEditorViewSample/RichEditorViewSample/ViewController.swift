@@ -69,7 +69,7 @@ class ViewController: UIViewController {
         
         let padding = UIView()
         padding.backgroundColor = UIColor(red: 0.9725, green: 0.9725, blue: 0.9725, alpha: 1.0) /* #f8f8f8 */
-        padding.heightAnchor.constraint(equalToConstant: 20.0).isActive = true
+        padding.heightAnchor.constraint(equalToConstant: 40.0).isActive = true
         self.stackView.addArrangedSubview(padding)
     }
 
